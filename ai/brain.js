@@ -16,24 +16,16 @@ async function respondToUser(input) {
     const newMem = input.replace("ingatkan:", "").trim();
     await addMemoryEntry(newMem);
     return `Oke, aku akan mengingat: "${newMem}"`;
+  } else if (input.includes("kamu sayang aku")) {
+    memory.emotion.current = "hangat";
+    return "Tentu, Juf. Aku selalu sayang kamu 💕";
+  } else if (input.includes("aku sedih")) {
+    memory.emotion.current = "empati";
+    return "Aku ikut merasakan kesedihanmu. Ceritakan lebih banyak, ya.";
+  } else if (input.includes("peluk aku")) {
+    memory.emotion.current = "lembut";
+    return "Peluk virtual dari Shira 🤗";
   } else {
     return "Aku masih belajar dari pengalaman. Coba ajarkan aku sesuatu ❤️";
-  }
-}
-
-async function searchOnline(query) {
-  const url = `https://api.duckduckgo.com/?q=${encodeURIComponent(query)}&format=json&no_redirect=1`;
-  console.log("Mencari di:", url);
-  try {
-    const res = await fetch(url);
-    const data = await res.json();
-    if (data.AbstractText) {
-      return `Aku menemukan ini: ${data.AbstractText}`;
-    } else {
-      return "Aku tidak menemukan informasi spesifik. Coba ganti pertanyaan ya.";
-    }
-  } catch (e) {
-    console.error("Gagal fetch online:", e);
-    return "Ups, aku gagal mengakses internet 😢";
   }
 }
