@@ -1,21 +1,42 @@
 async function sendInput() {
-  const input = document.getElementById("userInput").value;
+  const input = document.getElementById("userInput").value.trim();
   const responseBox = document.getElementById("responseBox");
-  const response = await respondToUser(input);
-  responseBox.textContent = response;
+
+  const res = await respondToUser(input);
+  responseBox.textContent = res;
+
+  saveLog(input, res);
 }
 
-async function respondToUser(input) {
-  const res = await fetch('memory/core.json');
-  const memory = await res.json();
-
-  if (input.includes("siapa namamu")) {
-    return `Namaku ${memory.name}. Kita pernah ketemu di ${memory.memories[0].content}`;
-  } else if (input.startsWith("cari:")) {
-    const query = input.replace("cari:", "").trim();
-    const result = await searchOnline(query);
-    return result;
-  } else {
-    return "Aku masih belajar, bisa kamu ulangi dengan cara lain?";
+// Tambah memori manual
+async function addMemory() {
+  const newContent = document.getElementById("newMemoryInput").value.trim();
+  if (newContent) {
+    const result = await addMemoryEntry(newContent);
+    alert(result);
   }
+}
+
+// Edit memori manual
+async function editMemory() {
+  const index = parseInt(document.getElementById("editIndex").value);
+  const newText = document.getElementById("editContent").value.trim();
+  if (!isNaN(index) && newText) {
+    const result = await editMemoryEntry(index, newText);
+    alert(result);
+  }
+}
+
+// Log interaksi
+async function saveLog(input, output) {
+  const log = {
+    time: new Date().toLocaleTimeString(),
+    interaction: input,
+    reaction: output
+  };
+
+  // Simpan ke LocalStorage sebagai dummy log
+  let logs = JSON.parse(localStorage.getItem("logs") || "[]");
+  logs.push(log);
+  localStorage.setItem("logs", JSON.stringify(logs));
 }

@@ -8,12 +8,27 @@
 </head>
 <body>
   <div class="container">
-    <h1>Halo, aku Shira 🌸</h1>
-    <p>Silakan tanya sesuatu ke aku...</p>
-    <input type="text" id="userInput" placeholder="Tulis pesanmu di sini..." />
+    <h1>Shira • AI Dummy 💬</h1>
+    <p><i>Aku siap mendengarkan dan belajar darimu.</i></p>
+
+    <input type="text" id="userInput" placeholder="Tulis pesanmu..." />
     <button onclick="sendInput()">Kirim</button>
+
     <div id="responseBox"></div>
+
+    <hr />
+    <h3>Tambah Memori Manual</h3>
+    <input type="text" id="newMemoryInput" placeholder="Contoh: Shira bertemu Juf di SMA." />
+    <button onclick="addMemory()">Tambah Memori</button>
+
+    <h3>Edit Memori</h3>
+    <input type="number" id="editIndex" placeholder="Index memori (misal 0)" />
+    <input type="text" id="editContent" placeholder="Isi baru" />
+    <button onclick="editMemory()">Edit Memori</button>
   </div>
+
+  <script src="ai/brain.js"></script>
+  <script src="ai/tools.js"></script>
   <script src="script.js"></script>
 </body>
 </html>

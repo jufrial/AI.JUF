@@ -1,6 +1,6 @@
 body {
   font-family: sans-serif;
-  background: #fbeffb;
+  background: #f4f4fc;
   color: #333;
   text-align: center;
   padding: 40px;
@@ -9,19 +9,23 @@ body {
   background: white;
   border-radius: 12px;
   padding: 20px;
-  max-width: 400px;
+  max-width: 500px;
   margin: auto;
   box-shadow: 0 0 10px rgba(0,0,0,0.1);
 }
 input {
   width: 80%;
   padding: 8px;
+  margin-top: 6px;
 }
 button {
   padding: 8px 16px;
-  margin-left: 8px;
+  margin: 6px;
 }
 #responseBox {
   margin-top: 20px;
   font-weight: bold;
+  background: #eef;
+  padding: 12px;
+  border-radius: 8px;
 }
