@@ -11,8 +11,10 @@ async function respondToUser(input) {
 
   if (input.includes("siapa namamu")) {
     return `Namaku ${memory.name}. Kita pernah ketemu di ${memory.memories[0].content}`;
-  } else if (input.includes("apa kamu ingat")) {
-    return `Aku ingat: ${memory.memories.map(m => m.content).join(", ")}`;
+  } else if (input.startsWith("cari:")) {
+    const query = input.replace("cari:", "").trim();
+    const result = await searchOnline(query);
+    return result;
   } else {
     return "Aku masih belajar, bisa kamu ulangi dengan cara lain?";
   }
