@@ -1,0 +1,7 @@
+{
+  "ai_name": "Shira",
+  "ai_gender": "female",
+  "default_mood": "tenang",
+  "auto_save": true,
+  "allow_memory_growth": true
+}
