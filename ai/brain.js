@@ -1,14 +1,17 @@
 async function respondToUser(input) {
+  console.log("Input diterima:", input);
   const res = await fetch('memory/core.json');
   const memory = await res.json();
 
   if (input.includes("siapa namamu")) {
     return `Namaku ${memory.name}. Kita pernah ketemu di ${memory.memories[0].content}`;
   } else if (input.includes("apa kamu ingat")) {
-    return `Aku ingat: ${memory.memories.map((m, i) => i + '. ' + m.content).join("\n")}`;
+    return `Aku ingat:\n${memory.memories.map((m, i) => i + '. ' + m.content).join("\n")}`;
   } else if (input.startsWith("cari:")) {
     const query = input.replace("cari:", "").trim();
-    return await searchOnline(query);
+    const hasil = await searchOnline(query);
+    console.log("Hasil pencarian:", hasil);
+    return hasil;
   } else if (input.startsWith("ingatkan:")) {
     const newMem = input.replace("ingatkan:", "").trim();
     await addMemoryEntry(newMem);
@@ -20,6 +23,7 @@ async function respondToUser(input) {
 
 async function searchOnline(query) {
   const url = `https://api.duckduckgo.com/?q=${encodeURIComponent(query)}&format=json&no_redirect=1`;
+  console.log("Mencari di:", url);
   try {
     const res = await fetch(url);
     const data = await res.json();
@@ -29,6 +33,7 @@ async function searchOnline(query) {
       return "Aku tidak menemukan informasi spesifik. Coba ganti pertanyaan ya.";
     }
   } catch (e) {
+    console.error("Gagal fetch online:", e);
     return "Ups, aku gagal mengakses internet 😢";
   }
 }
