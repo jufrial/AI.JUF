@@ -34,8 +34,6 @@ async function saveLog(input, output) {
     interaction: input,
     reaction: output
   };
-
-  // Simpan ke LocalStorage sebagai dummy log
   let logs = JSON.parse(localStorage.getItem("logs") || "[]");
   logs.push(log);
   localStorage.setItem("logs", JSON.stringify(logs));
